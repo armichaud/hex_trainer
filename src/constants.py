@@ -4,5 +4,5 @@ class Operation(Enum):
     ADD = "+"
     SUBTRACT = "-"
     MULTIPLY = "*"
-    DIVIDE = "/"
+    DIVIDE = "//"
     MOD = "%"

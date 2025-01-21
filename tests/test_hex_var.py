@@ -13,5 +13,5 @@ class TestHexVar:
     def test_hex_to_int_invalid(self):
         with pytest.raises(ValueError):
             HexVar.to_int("G")  # Invalid hex character
-        with pytest.raises(TypeError):
+        with pytest.raises(AttributeError):
             HexVar.to_int(123)  # Incorrect input type

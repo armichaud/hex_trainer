@@ -1,14 +1,15 @@
 import pytest
 from src.constants import Operation
 from src.hex_var import HexVar
-from src.problem import Problem
+from src.equation import Equation
 
 class TestProblem:
 
     def test_generate_problem_valid_operations(self):
-        problem = Problem()
+        problem = Equation()
 
-        a, b, op = problem._generate_problem()  
+        problem._generate_operands()
+        a, b = problem.operands
 
         assert isinstance(a, HexVar)
         a_hex = a.to_str()
@@ -20,4 +21,5 @@ class TestProblem:
         assert b_hex.startswith("0x")
         int(b_hex, 16)  # Try converting to int to ensure it's a valid hex
 
-        assert op in [*Operation]
+        problem._choose_operation()
+        assert problem.operation in [*Operation]
