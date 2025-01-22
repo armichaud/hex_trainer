@@ -8,6 +8,11 @@ OPERATOR_NAMES = [op.name for op in [*Operator]]
 
 client = TestClient(app=app)
 
+def test_get_hex():
+    response = client.get("/hex")
+    data = response.json()
+    assert re.match(HEX_REGEX, data.get("hex")) 
+
 def test_get_equation():
     response = client.get("/equation")
     assert response.status_code == 200

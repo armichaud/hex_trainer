@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from src.constants import Operator
 from src.equation import Equation
+from src.hex_var import HexVar
 from src.solution import Solution
 
 app = FastAPI()
@@ -13,6 +14,10 @@ class Attempt(BaseModel):
     operand_2: str
     operator: str
     answer: int
+
+@app.get("/hex")
+def get_hex_value():
+    return {"hex": HexVar().to_str()}
 
 @app.get("/equation")
 def get_equation(
