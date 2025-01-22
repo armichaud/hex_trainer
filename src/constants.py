@@ -1,6 +1,6 @@
 from enum import Enum
 
-class Operation(Enum):
+class Operator(Enum):
     ADD = "+"
     SUBTRACT = "-"
     MULTIPLY = "*"

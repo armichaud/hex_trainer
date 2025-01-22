@@ -1,11 +1,11 @@
 from typing import List, Tuple
 from random import choice
 
-from src.constants import Operation
+from src.constants import Operator
 from src.hex_var import HexVar
 
 class Equation:
-    def __init__(self, operations: List[Operation] = [*Operation]):
+    def __init__(self, operations: List[Operator] = [*Operator]):
         self.possible_operations = operations
         self._generate_operands()
         self._choose_operation()

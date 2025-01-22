@@ -1,5 +1,5 @@
 import pytest
-from src.constants import Operation
+from src.constants import Operator
 from src.hex_var import HexVar
 from src.equation import Equation
 
@@ -22,4 +22,4 @@ class TestProblem:
         int(b_hex, 16)  # Try converting to int to ensure it's a valid hex
 
         problem._choose_operation()
-        assert problem.operation in [*Operation]
+        assert problem.operation in [*Operator]

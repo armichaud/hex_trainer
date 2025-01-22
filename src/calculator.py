@@ -1,8 +1,8 @@
-from src.constants import Operation
+from src.constants import Operator
 from src.hex_var import HexVar
 
 class Calculator:
-    def __init__(self, a: str, b: str, op: Operation):
+    def __init__(self, a: str, b: str, op: Operator):
         self.a = HexVar.from_hex_str(a)
         self.b = HexVar.from_hex_str(b)
         self.op = op

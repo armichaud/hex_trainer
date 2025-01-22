@@ -1,3 +1,4 @@
 # dev-requirements.in
 -r requirements.txt
 pytest
+httpx

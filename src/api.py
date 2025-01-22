@@ -1,7 +1,7 @@
 from typing import Optional
 from fastapi import FastAPI
 
-from src.constants import Operation
+from src.constants import Operator
 from src.equation import Equation
 
 app = FastAPI()
@@ -14,8 +14,7 @@ def get_equation(
     div: Optional[bool] = None,
     mod: Optional[bool] = None
 ):
-    ops_zipped = zip([add, sub, mul, div, mod], [*Operation])
-    ops = [op for include, op in ops_zipped if include]
-    equation = Equation(ops)
+    ops = [op for include, op in zip([add, sub, mul, div, mod], [*Operator]) if include]
+    equation = Equation() if not ops else Equation(ops)
     a, b = equation.operands
-    return {"operand_1": a.to_str(), "operand_2": b.to_str(), "operation": equation.operation.name}
+    return {"operand_1": a.to_str(), "operand_2": b.to_str(), "operator": equation.operation.name}
