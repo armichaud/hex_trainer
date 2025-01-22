@@ -9,6 +9,10 @@ from src.solution import Solution
 
 app = FastAPI()
 
+class Conversion(BaseModel):
+    hex: str
+    guess: int
+
 class Attempt(BaseModel):
     operand_1: str
     operand_2: str
@@ -31,6 +35,15 @@ def get_equation(
     equation = Equation() if not ops else Equation(ops)
     a, b = equation.operands
     return {"operand_1": a.to_str(), "operand_2": b.to_str(), "operator": equation.operator.name}
+
+@app.post("/check_conversion")
+def check_conversion(conversion: Conversion, response: Response):
+    if HexVar.to_int(conversion.hex) == conversion.guess:
+        return {"answer": "correct"}
+    else:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"answer": "wrong"}
+
 
 @app.post("/evaluate")
 def evaluate_solution(attempt: Attempt, response: Response):

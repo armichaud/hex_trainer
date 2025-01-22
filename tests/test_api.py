@@ -11,7 +11,7 @@ client = TestClient(app=app)
 def test_get_hex():
     response = client.get("/hex")
     data = response.json()
-    assert re.match(HEX_REGEX, data.get("hex")) 
+    assert re.match(HEX_REGEX, data.get("hex"))
 
 def test_get_equation():
     response = client.get("/equation")
@@ -55,5 +55,29 @@ def test_post_solution():
         "/evaluate",
         json=incorrect_attempt
     )
-    assert response.status_code == 400
     assert response.json() == {"answer": "wrong"} 
+    assert response.status_code == 400
+
+
+def test_check_conversion():
+    correct_conversion = {
+        "hex": "0x1F",
+        "guess": 31
+    }
+    response = client.post(
+        "/check_conversion",
+        json=correct_conversion
+    )
+    assert response.json() == {"answer": "correct"}
+    assert response.status_code == 200
+
+    incorrect_conversion = {
+        "hex": "0x1F",
+        "guess": 30
+    }
+    response = client.post(
+        "/check_conversion",
+        json=incorrect_conversion
+    )
+    assert response.json() == {"answer": "wrong"}
+    assert response.status_code == 400 
