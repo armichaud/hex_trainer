@@ -30,3 +30,25 @@ def test_get_equation():
     assert response.status_code == 200
     data = response.json()
     assert data.get("operator") == Operator.SUBTRACT.name
+
+def test_post_solution():
+    correct_attempt = {
+        "operand_1": "0x1F",
+        "operand_2": "0x08",
+        "operator": "ADD",
+        "answer": 39
+    }
+    response = client.post(
+        "/evaluate",
+        json=correct_attempt
+    )
+    assert response.json() == {"answer": "correct"}
+    assert response.status_code == 200
+
+    incorrect_attempt = {**correct_attempt, "answer": 40}
+    response = client.post(
+        "/evaluate",
+        json=incorrect_attempt
+    )
+    assert response.status_code == 400
+    assert response.json() == {"answer": "wrong"} 

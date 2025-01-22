@@ -14,4 +14,4 @@ class Equation:
         self.operands = (HexVar(), HexVar())
 
     def _choose_operation(self):
-        self.operation = choice(self.possible_operations)
+        self.operator = choice(self.possible_operations)
