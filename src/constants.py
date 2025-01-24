@@ -6,3 +6,5 @@ class Operator(Enum):
     MULTIPLY = "*"
     DIVIDE = "//"
     MOD = "%"
+
+OPERATOR_NAMES = [op.name for op in [*Operator]]

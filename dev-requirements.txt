@@ -17,6 +17,8 @@ certifi==2024.12.14
     # via
     #   httpcore
     #   httpx
+click==8.1.8
+    # via -r requirements.txt
 fastapi==0.115.6
     # via -r requirements.txt
 h11==0.14.0
