@@ -1,3 +1,3 @@
 TODO
-- Timer
-- Test CLI
+- int-to-hex
+- Tests for CLI
