@@ -1,0 +1,3 @@
+TODO
+- Timer
+- Test CLI
