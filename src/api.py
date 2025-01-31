@@ -5,15 +5,14 @@ from pydantic import BaseModel
 from src.constants import Operator
 from src.equation import Equation
 from src.hex_var import HexVar
-from src.solution import Solution
 
 app = FastAPI()
 
 class Conversion(BaseModel):
     hex: str
-    guess: int
+    answer: int
 
-class Attempt(BaseModel):
+class Solution(BaseModel):
     operand_1: str
     operand_2: str
     operator: str
@@ -32,23 +31,28 @@ def get_equation(
     mod: Optional[bool] = None
 ):
     ops = [op for include, op in zip([add, sub, mul, div, mod], [*Operator]) if include]
-    equation = Equation() if not ops else Equation(ops)
+    equation = Equation.generate() if not ops else Equation.generate(ops)
     a, b = equation.operands
     return {"operand_1": a.to_str(), "operand_2": b.to_str(), "operator": equation.operator.name}
 
 @app.post("/check_conversion")
 def check_conversion(conversion: Conversion, response: Response):
-    if HexVar.to_int(conversion.hex) == conversion.guess:
-        return {"answer": "correct"}
+    if HexVar.to_int(conversion.hex) == conversion.answer:
+        return {"result": "correct"}
     else:
         response.status_code = status.HTTP_400_BAD_REQUEST
-        return {"answer": "wrong"}
+        return {"result": "incorrect"}
 
 
 @app.post("/evaluate")
-def evaluate_solution(attempt: Attempt, response: Response):
-    if Solution(a=attempt.operand_1, b=attempt.operand_2, op=attempt.operator).check_answer(attempt.answer):
-        return {"answer": "correct"}
+def evaluate_solution(solution: Solution, response: Response):
+    equation = Equation.build_from_terms(
+        operand_1=solution.operand_1, 
+        operand_2=solution.operand_2, 
+        operator=solution.operator
+    )
+    if equation.check_answer(solution.answer):
+        return {"result": "correct"}
     else:
         response.status_code = status.HTTP_400_BAD_REQUEST
-        return {"answer": "wrong"}
+        return {"result": "incorrect"}

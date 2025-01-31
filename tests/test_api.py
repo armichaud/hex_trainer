@@ -46,7 +46,7 @@ def test_post_solution():
         "/evaluate",
         json=correct_attempt
     )
-    assert response.json() == {"answer": "correct"}
+    assert response.json() == {"result": "correct"}
     assert response.status_code == 200
 
     incorrect_attempt = {**correct_attempt, "answer": 40}
@@ -54,29 +54,29 @@ def test_post_solution():
         "/evaluate",
         json=incorrect_attempt
     )
-    assert response.json() == {"answer": "wrong"} 
+    assert response.json() == {"result": "incorrect"} 
     assert response.status_code == 400
 
 
 def test_check_conversion():
     correct_conversion = {
         "hex": "0x1F",
-        "guess": 31
+        "answer": 31
     }
     response = client.post(
         "/check_conversion",
         json=correct_conversion
     )
-    assert response.json() == {"answer": "correct"}
+    assert response.json() == {"result": "correct"}
     assert response.status_code == 200
 
     incorrect_conversion = {
         "hex": "0x1F",
-        "guess": 30
+        "answer": 30
     }
     response = client.post(
         "/check_conversion",
         json=incorrect_conversion
     )
-    assert response.json() == {"answer": "wrong"}
+    assert response.json() == {"result": "incorrect"}
     assert response.status_code == 400 
