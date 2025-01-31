@@ -20,7 +20,7 @@ class Solution(BaseModel):
 
 @app.get("/hex")
 def get_hex_value():
-    return {"hex": HexVar().to_str()}
+    return {"hex": HexVar().str_val()}
 
 @app.get("/equation")
 def get_equation(
@@ -33,7 +33,7 @@ def get_equation(
     ops = [op for include, op in zip([add, sub, mul, div, mod], [*Operator]) if include]
     equation = Equation.generate() if not ops else Equation.generate(ops)
     a, b = equation.operands
-    return {"operand_1": a.to_str(), "operand_2": b.to_str(), "operator": equation.operator.name}
+    return {"operand_1": a.str_val(), "operand_2": b.str_val(), "operator": equation.operator.name}
 
 @app.post("/check_conversion")
 def check_conversion(conversion: Conversion, response: Response):

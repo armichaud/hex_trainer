@@ -38,7 +38,7 @@ class Equation:
         self.answer = eval(f"{self.operands[0].int_val}{self.operator.value}{self.operands[1].int_val}")
 
     def to_str(self):
-        return f"{self.operands[0].to_str()} {self.operator.value} {self.operands[1].to_str()}"
+        return f"{self.operands[0].str_val()} {self.operator.value} {self.operands[1].str_val()}"
     
     def check_answer(self, answer):
         return answer == self.answer
