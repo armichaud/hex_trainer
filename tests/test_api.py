@@ -56,13 +56,13 @@ def test_post_solution():
     assert response.status_code == 400
 
 
-def test_check_conversion():
+def test_check_hex_conversion():
     correct_conversion = {
         "hex": "0x1F",
         "answer": 31
     }
     response = client.post(
-        "/check_conversion",
+        "/check_hex_conversion",
         json=correct_conversion
     )
     assert response.json() == {"result": "correct"}
@@ -73,7 +73,31 @@ def test_check_conversion():
         "answer": 30
     }
     response = client.post(
-        "/check_conversion",
+        "/check_hex_conversion",
+        json=incorrect_conversion
+    )
+    assert response.json() == {"result": "incorrect"}
+    assert response.status_code == 400 
+
+
+def test_check_int_conversion():
+    correct_conversion = {
+        "answer": "0x1F",
+        "n": 31
+    }
+    response = client.post(
+        "/check_int_conversion",
+        json=correct_conversion
+    )
+    assert response.json() == {"result": "correct"}
+    assert response.status_code == 200
+
+    incorrect_conversion = {
+        "answer": "0x1F",
+        "n": 30
+    }
+    response = client.post(
+        "/check_int_conversion",
         json=incorrect_conversion
     )
     assert response.json() == {"result": "incorrect"}

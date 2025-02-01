@@ -1,22 +1,12 @@
 from typing import Optional
 from fastapi import FastAPI, Response, status
-from pydantic import BaseModel
 
 from src.constants import Operator
 from src.equation import Equation
 from src.hex_var import HexVar
+from src.models import HexConversion, IntConversion, Solution
 
 app = FastAPI()
-
-class Conversion(BaseModel):
-    hex: str
-    answer: int
-
-class Solution(BaseModel):
-    operand_1: str
-    operand_2: str
-    operator: str
-    answer: int
 
 @app.get("/hex")
 def get_hex_value():
@@ -35,9 +25,18 @@ def get_equation(
     a, b = equation.operands
     return {"operand_1": a.str_val, "operand_2": b.str_val, "operator": equation.operator.name}
 
-@app.post("/check_conversion")
-def check_conversion(conversion: Conversion, response: Response):
+@app.post("/check_hex_conversion")
+def check_hex_conversion(conversion: HexConversion, response: Response):
     if HexVar.to_int(conversion.hex) == conversion.answer:
+        return {"result": "correct"}
+    else:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"result": "incorrect"}
+
+
+@app.post("/check_int_conversion")
+def check_int_conversion(conversion: IntConversion, response: Response):
+    if conversion.n == HexVar.from_hex_str(conversion.answer).int_val:
         return {"result": "correct"}
     else:
         response.status_code = status.HTTP_400_BAD_REQUEST
