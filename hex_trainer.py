@@ -1,3 +1,4 @@
+import re
 import click
 import time
 
@@ -16,6 +17,28 @@ def hex_to_int():
     answer = click.prompt(f"What is the decimal equivalent of {hex.str_val()}?", type=int)
     elapsed_time = time.perf_counter() - start_time
     click.echo(f"Correct! You answered in {elapsed_time: .2f} seconds." if answer == hex.int_val else f"Incorrect. The answer was {hex.int_val}.")
+
+@click.command()
+def int_to_hex():
+    hex = HexVar()
+    start_time = time.perf_counter()
+    answer = click.prompt(
+        f"""
+            What is the hexidecimal equivalent of {hex.int_val}?
+            Type your answer like so: F6
+            Do not include a prefix indicating a hexidecimal, e.g. 0xF6
+        """, 
+        type=str
+    )
+    correct_answer = hex.str_val()
+    if not re.match("[0-9a-fA-F]+", answer):
+        click.echo("Incorrectly formatted answer. The correct answer was {correct_answer}.")
+    elif answer == correct_answer:
+        elapsed_time = time.perf_counter() - start_time
+        click.echo("Correct! You solved this in {elapsed_time: .2f} seconds.")
+    else:
+        click.echo(f"Incorrect. The answer was {hex.str_val()}.")
+
 
 @click.command()
 def solve_equation():
