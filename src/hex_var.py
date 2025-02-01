@@ -3,7 +3,7 @@ from random import randint
 
 class HexVar:
     def __init__(self):
-        self.int_val = randint(1, 255) 
+        self._set_int_val()
         self._set_str_val()
 
     @classmethod
@@ -17,6 +17,9 @@ class HexVar:
     def to_int(s: str) -> int:
         # TODO add error handling
         return int(s.strip(), 16)
+
+    def _set_int_val(self):
+        self.int_val = randint(1, 255)
     
     def _set_str_val(self) -> None:
         self.str_val = "0x{:02X}".format(self.int_val)

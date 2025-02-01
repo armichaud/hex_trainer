@@ -19,8 +19,7 @@ python hex_trainer.py solve-equation
 I've developed a FastAPI based API as the backend for a browser-based SPA I hope to create. Next step is to serve the API from a docker container.
 
 ## Features I'd Like to Implement
-- Int-to-hex: given a decimal value, give the hexidecimal equivalent
-- CLI Unit Testing
+- Option to answer equation in hexidecimal
 - Browser-based UI
 - Containerization of API and UI
 - Better error handling, e.g. failed conversion to/from hex
