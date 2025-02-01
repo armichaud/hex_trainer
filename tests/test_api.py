@@ -1,9 +1,7 @@
 import re
 from fastapi.testclient import TestClient
 from src.api import app
-from src.constants import OPERATOR_NAMES, Operator
-
-HEX_REGEX = "0x[0-9a-fA-F]+"
+from src.constants import HEX_REGEX, OPERATOR_NAMES, Operator
 
 client = TestClient(app=app)
 

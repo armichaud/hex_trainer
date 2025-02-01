@@ -8,3 +8,5 @@ class Operator(Enum):
     MOD = "%"
 
 OPERATOR_NAMES = [op.name for op in [*Operator]]
+
+HEX_REGEX = "0x[0-9a-fA-F]+"
