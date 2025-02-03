@@ -55,6 +55,22 @@ def test_post_solution():
     assert response.json() == {"result": "incorrect"} 
     assert response.status_code == 400
 
+    correct_hex_answer = {**correct_attempt, "answer": "0x27"}
+    response = client.post(
+        "/evaluate?answer_in_hex=1",
+        json=correct_hex_answer
+    )
+    assert response.json() == {"result": "correct"}
+    assert response.status_code == 200
+
+
+    incorrect_hex_answer = {**correct_attempt, "answer": "0x26"}
+    response = client.post(
+        "/evaluate?answer_in_hex=1",
+        json=incorrect_hex_answer
+    )
+    assert response.json() == {"result": "incorrect"}
+    assert response.status_code == 400
 
 def test_check_hex_conversion():
     correct_conversion = {
@@ -79,7 +95,6 @@ def test_check_hex_conversion():
     assert response.json() == {"result": "incorrect"}
     assert response.status_code == 400 
 
-
 def test_check_int_conversion():
     correct_conversion = {
         "answer": "0x1F",
@@ -101,4 +116,4 @@ def test_check_int_conversion():
         json=incorrect_conversion
     )
     assert response.json() == {"result": "incorrect"}
-    assert response.status_code == 400 
+    assert response.status_code == 400

@@ -44,13 +44,18 @@ def check_int_conversion(conversion: IntConversion, response: Response):
 
 
 @app.post("/evaluate")
-def evaluate_solution(solution: Solution, response: Response):
+def evaluate_solution(
+    solution: Solution,
+    response: Response,
+    answer_in_hex: Optional[bool] = None,
+):
     equation = Equation.build_from_terms(
         operand_1=solution.operand_1, 
         operand_2=solution.operand_2, 
         operator=solution.operator
     )
-    if equation.check_answer(solution.answer):
+    answer = HexVar.to_int(solution.answer) if answer_in_hex else solution.answer
+    if equation.check_answer(answer):
         return {"result": "correct"}
     else:
         response.status_code = status.HTTP_400_BAD_REQUEST

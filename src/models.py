@@ -1,3 +1,4 @@
+from typing import Union
 from pydantic import BaseModel
 
 
@@ -13,4 +14,5 @@ class Solution(BaseModel):
     operand_1: str
     operand_2: str
     operator: str
-    answer: int
+    answer: Union[int, str]
+    
