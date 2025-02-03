@@ -37,7 +37,8 @@ def int_to_hex():
 
 
 @click.command()
-def solve_equation():
+@click.option("--answer-in-hex", is_flag=True, help="answer will be given as a hexidecimal")
+def solve_equation(answer_in_hex: bool):
     operators = click.prompt(
         text="""
             Provide a comma-separated list of operators you'd like to be tested on. 
@@ -52,7 +53,8 @@ def solve_equation():
     equation = Equation().generate() if not ops else Equation.generate(ops)
     click.echo(equation.to_str())
     start_time = time.perf_counter()
-    answer = click.prompt("Your answer", type=int)
+    answer = click.prompt("Your answer")
+    answer = HexVar.to_int(answer) if answer_in_hex else int(answer)
     elapsed_time = time.perf_counter() - start_time
     click.echo(f"Correct! You answered in {elapsed_time: .2f} seconds." if equation.check_answer(answer) else f"Incorrect. The answer was {equation.answer}.")
 

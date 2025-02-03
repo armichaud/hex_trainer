@@ -21,10 +21,10 @@ python hex_trainer.py int-to-hex
 
 # After selecting which operators you'd like to train with,
 # you'll be prompted for the solution to an equation using hexidecimal values.
-python hex_trainer.py solve-equation
+# Optional flag determines whether answer is expected in decimal or hexidecimal.
+python hex_trainer.py solve-equation [--answer-in-hex]
 ```
 
 ## Features I'd Like to Implement
 - Deploy production API
-- Option to answer equation in hexidecimal
 - Better error handling, e.g. failed conversion to/from hex
