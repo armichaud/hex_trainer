@@ -8,6 +8,10 @@ from src.models import HexConversion, IntConversion, Solution
 
 app = FastAPI()
 
+@app.get("/")
+def health_check():
+    return {}
+
 @app.get("/hex")
 def get_hex_value():
     return {"hex": HexVar().str_val}
