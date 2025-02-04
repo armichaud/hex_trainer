@@ -11,6 +11,6 @@ run:
   pre-run:
     - pip3 install pipenv
     - pipenv install -r requirements.txt
-  command: pipenv run uvicorn src.api:app --port 8000
+  command: pipenv run uvicorn src.api:app --port 8080
   network:
-    port: 8000
+    port: 8080
