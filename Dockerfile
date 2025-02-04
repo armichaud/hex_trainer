@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.12.2-slim
+FROM python:3.11-slim
 
 RUN apt-get update && apt-get install -y\
     # Remove package lists to minimize image size
