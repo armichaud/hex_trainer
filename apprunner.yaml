@@ -9,6 +9,6 @@ run:
   runtime-version: 3.11
   pre-run:
     - pip3 install --no-cache-dir -r requirements.txt
-  command: uvicorn src.api:app --port 8080
+  command: uvicorn src.api:app --port 8000
   network:
-    port: 8080
+    port: 8000
