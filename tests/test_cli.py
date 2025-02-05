@@ -10,7 +10,7 @@ def test_hex_to_int():
 def test_int_to_hex():
     runner = CliRunner()
     result = runner.invoke(cli, args=['int-to-hex'], input="0xFFF")
-    assert "What is the hexidecimal equivalent of " in result.output
+    assert "What is the hexadecimal equivalent of " in result.output
     assert "Incorrect" in result.output
 
 def test_solve_equation():

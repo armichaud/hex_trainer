@@ -23,7 +23,7 @@ def int_to_hex():
     hex = HexVar()
     start_time = time.perf_counter()
     answer = click.prompt(
-        text=f"What is the hexidecimal equivalent of {hex.int_val}?\n",
+        text=f"What is the hexadecimal equivalent of {hex.int_val}?\n",
         prompt_suffix="Type your answer in the following format: 0x6F\n>",
         type=str
     )
@@ -37,7 +37,7 @@ def int_to_hex():
 
 
 @click.command()
-@click.option("--answer-in-hex", is_flag=True, help="answer will be given as a hexidecimal")
+@click.option("--answer-in-hex", is_flag=True, help="answer will be given as a hexadecimal")
 def solve_equation(answer_in_hex: bool):
     operators = click.prompt(
         text="""

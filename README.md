@@ -1,5 +1,5 @@
 # Hex Trainer
-While learning about low-level programming and assembly, I found myself slowing down every time I encountered hex codes as representations of stack addresses and offsets. I wanted to build a small tool with which to improve my ability to translate hexidecimal to decimal values and do mental math with hexidecimal values.
+While learning about low-level programming and assembly, I found myself slowing down every time I encountered hex codes as representations of stack addresses and offsets. I wanted to build a small tool with which to improve my ability to translate hexadecimal to decimal values and do mental math with hexadecimal values.
 
 As of 2/1/25, this is a work in progress.
 
@@ -13,15 +13,15 @@ The simplest way to access it is to just start the API container, `exec` into it
 and run the commands below.
 
 ```
-# Given a hexidecimal value, you will be prompted for its decimal equivalent.
+# Given a hexadecimal value, you will be prompted for its decimal equivalent.
 python hex_trainer.py hex-to-int
 
-# Given a decimal value, you will be prompted for its hexidecimal equivalent.
+# Given a decimal value, you will be prompted for its hexadecimal equivalent.
 python hex_trainer.py int-to-hex
 
 # After selecting which operators you'd like to train with,
-# you'll be prompted for the solution to an equation using hexidecimal values.
-# Optional flag determines whether answer is expected in decimal or hexidecimal.
+# you'll be prompted for the solution to an equation using hexadecimal values.
+# Optional flag determines whether answer is expected in decimal or hexadecimal.
 python hex_trainer.py solve-equation [--answer-in-hex]
 ```
 
