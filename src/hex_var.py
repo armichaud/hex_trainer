@@ -1,4 +1,8 @@
 from random import randint
+import re
+
+from src.constants import HEX_REGEX
+from src.exceptions import InvalidHexadecimalException
 
 
 class HexVar:
@@ -13,13 +17,22 @@ class HexVar:
         hex_var._set_str_val()
         return hex_var
     
+    @classmethod
+    def from_int(cls, n: int):
+        hex_var = cls()
+        hex_var.int_val = n
+        hex_var._set_str_val()
+        return hex_var
+    
     @staticmethod
     def to_int(s: str) -> int:
-        # TODO add error handling
+        if not re.match(HEX_REGEX, s):
+            raise InvalidHexadecimalException(s)
         return int(s.strip(), 16)
 
     def _set_int_val(self):
         self.int_val = randint(1, 255)
     
     def _set_str_val(self) -> None:
+        # someday I may enable users to configure the number of digits
         self.str_val = "0x{:02X}".format(self.int_val)

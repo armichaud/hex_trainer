@@ -1,8 +1,6 @@
 # Hex Trainer
 While learning about low-level programming and assembly, I found myself slowing down every time I encountered hex codes as representations of stack addresses and offsets. I wanted to build a small tool with which to improve my ability to translate hexadecimal to decimal values and do mental math with hexadecimal values.
 
-As of 2/1/25, this is a work in progress.
-
 ## API
 The primary means of using the trainer is a FastAPI-based app, ready to be served from a docker container with `docker-compose up`.
 The API is served at `localhost:8000`. To view the list of routes and their schemata, load the `/docs` route in a browser.
@@ -25,6 +23,5 @@ python hex_trainer.py int-to-hex
 python hex_trainer.py solve-equation [--answer-in-hex]
 ```
 
-## Features I'd Like to Implement
-- Deploy production API
-- Better error handling, e.g. failed conversion to/from hex
+## Features I'd Still Like to Implement
+- Browser-based UI
